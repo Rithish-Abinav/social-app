@@ -64,7 +64,7 @@ export default function Register() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/register`,
+        `/api/register`,
         form
       );
 

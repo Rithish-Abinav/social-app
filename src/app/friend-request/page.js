@@ -25,7 +25,7 @@ export default function Page() {
       const GetFriendList = async () => {
         try {
           const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/register/${userDetail._id}`
+            `/api/register/${userDetail._id}`
           );
           setFriendList(response.data.friends || []);
         } catch (error) {
@@ -40,7 +40,7 @@ export default function Page() {
   const changeFriendStatus = async (status, friend) => {
     try {
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/register/${userDetail._id}`,
+        `/register/${userDetail._id}`,
         {
           friend: {
             id: friend._id,

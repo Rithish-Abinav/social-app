@@ -69,7 +69,7 @@ export default function Page() {
     const Posts = async()=>{
       try{
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/post`);
+        `/api/post`);
       console.log(response)
       setAllPost(response.data)
     }
@@ -85,7 +85,7 @@ export default function Page() {
     e.preventDefault();
     const userDetail = JSON.parse(localStorage.getItem('userdetail'));
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/post`, {
+      const response = await axios.post(`/api/post`, {
         name: userDetail.name,
         image: userDetail.image,  // Use profileImage instead of image
         post: post,

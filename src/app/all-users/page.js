@@ -21,7 +21,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/register`);
+        const response = await axios.get(`/api/register`);
         setAllUser(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -39,7 +39,7 @@ export default function Page() {
   
     try {
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/register/${item._id}`,
+        `/register/${item._id}`,
         {
           friend: {
             id: userDetail._id,
