@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/no-unescaped-entities */
 
@@ -40,6 +42,7 @@ export default function Page() {
   useEffect(() => {
     // Retrieve user details from localStorage
     const userDetail = JSON.parse(localStorage.getItem('userdetail'));
+    // console.log(userDetail)
 
     if (userDetail) {
       // Set the retrieved user data to state
@@ -70,7 +73,7 @@ export default function Page() {
       try{
       const response = await axios.get(
         `/api/post`);
-      console.log(response)
+      // console.log(response)
       setAllPost(response.data)
     }
     catch(err){
