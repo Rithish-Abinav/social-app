@@ -61,7 +61,17 @@ export default function Register() {
   
 
   const handleSubmit = async (e) => {
+
+
     e.preventDefault();
+
+
+    if(form.password !== form.confirmPassword){
+      setErr("Confrim Password Not Match")
+      return
+    }
+    
+
 setLoad(true)
     console.log(form)
 

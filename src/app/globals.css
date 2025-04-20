@@ -366,3 +366,9 @@ animation: loader 1s infinite linear;
     transform: rotate(360deg);
   }
 }
+
+.error{
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
