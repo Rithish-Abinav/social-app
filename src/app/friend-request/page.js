@@ -8,10 +8,12 @@ import '../globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import axios from 'axios'
+import Loader from '@/components/Loader'
 
 export default function Page() {
   const [friendList, setFriendList] = useState([]);
   const [userDetail, setUserDetail] = useState(null);
+    const[load,setLoad] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('userdetail');
@@ -21,6 +23,7 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
+    setLoad(true);
     if (userDetail) {
       const GetFriendList = async () => {
         try {
@@ -30,6 +33,8 @@ export default function Page() {
           setFriendList(response.data.friends || []);
         } catch (error) {
           console.error('Error fetching friend list:', error);
+        }finally{
+    setLoad(false);
         }
       };
 
@@ -38,9 +43,11 @@ export default function Page() {
   }, [userDetail]);
 
   const changeFriendStatus = async (status, friend) => {
+    setLoad(true);
+
     try {
       const response = await axios.put(
-        `/register/${userDetail._id}`,
+        `/api/register/${userDetail._id}`,
         {
           friend: {
             id: friend._id,
@@ -63,11 +70,21 @@ export default function Page() {
 
     } catch (error) {
       console.error('Error updating friend request:', error.response?.data || error.message);
+    } finally{
+    setLoad(false);
+
     }
   };
 
   return (
     <div className='loggedPages'>
+
+      
+             {load && 
+                               <Loader/>
+                        }
+
+
       <Header />
 
       <div className='allUsers'>

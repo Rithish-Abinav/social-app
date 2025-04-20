@@ -5,10 +5,13 @@ import '../globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import axios, { all } from 'axios';
+import Loader from '@/components/Loader';
 
 export default function Page() {
   const [allUser, setAllUser] = useState([]);
   const [userDetail, setUserDetail] = useState(null);
+      const[load,setLoad] = useState(false);
+  
 
   useEffect(() => {
     // Fetch user details from localStorage (client only)
@@ -20,11 +23,14 @@ export default function Page() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoad(true);
       try {
         const response = await axios.get(`/api/register`);
         setAllUser(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
+      }finally{
+      setLoad(false);
       }
     };
     fetchData();
@@ -34,12 +40,13 @@ export default function Page() {
 
 
   const AddFriend = async (item) => {
-    console.log(item.image)
+    setLoad(true);
+
     const userDetail = JSON.parse(localStorage.getItem('userdetail'));
   
     try {
       const response = await axios.put(
-        `/register/${item._id}`,
+        `/api/register/${item._id}`,
         {
           friend: {
             id: userDetail._id,
@@ -55,6 +62,8 @@ export default function Page() {
   
     } catch (error) {
       console.error('Error adding friend:', error.response?.data || error.message);
+    }finally{
+      setLoad(false)
     }
   };
   
@@ -63,6 +72,11 @@ export default function Page() {
 
   return (
     <div className='loggedPages'>
+
+       {load && 
+                         <Loader/>
+                  }
+
       <Header />
 
       <div className='allUsers'>

@@ -6,9 +6,14 @@ import '../globals.css';
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'; 
+import Loader from '@/components/Loader';
 
 
 export default function Register() {
+
+
+    const[load,setLoad] = useState(false);
+  
 
     const router = useRouter(); 
 
@@ -35,7 +40,11 @@ export default function Register() {
   };
 
   const handleSubmit = async(e) => {
+
     e.preventDefault();
+
+    setLoad(true);
+
     try {
       const response = await axios.post(`/api/login`,
         form
@@ -55,6 +64,8 @@ export default function Register() {
       } else {
         setErr("An error occurred. Please try again.");
       }
+    } finally{
+      setLoad(false)
     }
 
   };
@@ -65,6 +76,9 @@ export default function Register() {
 
   return (
     <div id='register_module'>
+      {load && 
+             <Loader/>
+      }
       <div className='logo'>
         <img width='100%' src="/assets/logo.png" alt="Logo" />
       </div>

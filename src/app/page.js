@@ -11,10 +11,13 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'; 
+import Loader from '@/components/Loader'
 
 
 
 export default function Page() {
+
+    const[load,setLoad] = useState(false);
 
    const router = useRouter(); 
 
@@ -70,6 +73,7 @@ export default function Page() {
 
   useEffect(()=>{
     const Posts = async()=>{
+      setLoad(true);
       try{
       const response = await axios.get(
         `/api/post`);
@@ -78,6 +82,8 @@ export default function Page() {
     }
     catch(err){
       console.log(err)
+    }finally{
+      setLoad(false);
     }
     }
     Posts()
@@ -86,6 +92,8 @@ export default function Page() {
 
   const addPost = async (e) => {
     e.preventDefault();
+    setLoad(true);
+
     const userDetail = JSON.parse(localStorage.getItem('userdetail'));
     try {
       const response = await axios.post(`/api/post`, {
@@ -99,11 +107,17 @@ export default function Page() {
       setPopup(false); // Close the popup after posting
     } catch (err) {
       console.log('Error adding post:', err);
+    }finally{
+      setLoad(false);
+
     }
   };
 
   return (
     <div className='loggedPages'>
+       {load && 
+                   <Loader/>
+            }
       <Header/>
 
 <div className='myProfile'>
