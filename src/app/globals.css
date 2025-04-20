@@ -8,6 +8,15 @@
   font-family: "Lexend Deca", sans-serif;
 }
 
+html, body {
+  touch-action: manipulation;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  max-width: 100%;
+  user-select: none; /* Optional: Prevent text selection */
+}
+
 :root{
   --oarnge:#ec5f00;
 }
