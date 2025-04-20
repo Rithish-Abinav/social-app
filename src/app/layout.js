@@ -25,7 +25,7 @@ export const metadata = {
     siteName: "Rithish Social",
     images: [
       {
-        url: "https://rithish-social.vercel.app/og-image.png", 
+        url: "https://rithish-social.vercel.app/assets/og.webp", 
         width: 1200,
         height: 630,
         alt: "Rithish Social OG Image",
