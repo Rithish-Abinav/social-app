@@ -17,6 +17,12 @@ export const metadata = {
   title: "Rithish | Social App",
   description:
     "A simple social app built with Next.js featuring user registration, profile image upload, and clean UI.",
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+      userScalable: 'no',
+    },
   openGraph: {
     title: "Rithish | Social App",
     description:
