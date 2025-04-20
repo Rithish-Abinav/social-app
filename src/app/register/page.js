@@ -36,7 +36,7 @@ export default function Register() {
     }));
 
     if (name === 'name' && value.length > 0) {
-      const formattedName = value.trim().replace(/\s+/g, '-'); 
+      const formattedName = value.trim().replace(/\s+/g, '-').toLowerCase(); 
       const randomSuffix = Math.floor(10000 + Math.random() * 90000);
       const generatedUsername = `${formattedName}${randomSuffix}`;
       setUsernameOptions([generatedUsername]);
